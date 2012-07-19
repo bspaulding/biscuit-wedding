@@ -1,5 +1,8 @@
+html { 
+}
+
 body { 
   margin: 2%;
-  border: 6px solid black;
-  border-image: url('../images/map-border.png') 9 repeat;
+  border: 2px dashed black;
+  background: rgb(255, 255, 222);
 }

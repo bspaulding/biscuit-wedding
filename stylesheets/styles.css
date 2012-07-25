@@ -1,8 +1,63 @@
-html { 
+html {
 }
 
-body { 
+body {
   margin: 2%;
-  border: 2px dashed black;
-  background: rgb(255, 255, 222);
+  margin-top: 10%;
+  background-image: url('../images/wood-texture.jpg');
+  background-image: url('../images/body_noise_media.png');
+  -webkit-transform-style: preserve-3d;
+}
+
+figure {
+  position: relative;
+  width: 60%;
+  max-width: 480px;
+  background: #FAFAFA;
+  padding: 0.8em;
+  padding-bottom: 0px;
+  margin: 0px auto;
+
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 40px rgba(150, 150, 150, 0.3) inset;
+  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 40px rgba(150, 150, 150, 0.3) inset;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 40px rgba(150, 150, 150, 0.3) inset;
+}
+figure:before,
+figure:after {
+  content: '';
+  display: block;
+  width: 35%;
+  height: 1em;
+  position: absolute; left: 0.5em; bottom: 0.3em;
+  z-index: -1;
+  background: transparent;
+  -webkit-box-shadow: 0px 0px 1em rgba(0,0,0,1);
+  -moz-box-shadow: 0px 0px 1em rgba(0,0,0,1);
+  box-shadow: 0px 0px 1em rgba(0,0,0,1);
+
+  -webkit-transform: rotate(-6deg) skew(-6deg);
+  -moz-transform: rotate(-6deg) skew(-6deg);
+  transform: rotate(-6deg) skew(-6deg);
+}
+figure:after {
+  left: auto; right: 1em;
+  -webkit-transform: rotate(4deg) skew(4deg);
+  -moz-transform: rotate(4deg) skew(4deg);
+  transform: rotate(4deg) skew(4deg);
+}
+figure>.stage { width: 100%; max-width: 100%; position: relative; }
+figure>.stage:after {
+  position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;
+  content: '';
+  display: block;
+  -webkit-box-shadow: 0px 0px 0.5em rgba(0, 0, 0, 1) inset; z-index: 1;
+  -moz-box-shadow: 0px 0px 0.5em rgba(0, 0, 0, 1) inset; z-index: 1;
+  box-shadow: 0px 0px 0.5em rgba(0, 0, 0, 1) inset; z-index: 1;
+}
+figure>.stage>img { width: 100%; max-width: 100%; z-index: 0; }
+figure>figcaption {
+  text-align: center;
+  padding: 0.8em;
+  font-weight: bold;
+  font-size: 1.8em;
 }

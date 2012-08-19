@@ -1,4 +1,10 @@
 BiscuitWedding::Application.routes.draw do
+  root :to => "pages#our-story"
+
+  BiscuitWedding::Application::STATIC_PAGES.each do |slug|
+    match "/#{slug}" => "pages##{slug}"
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

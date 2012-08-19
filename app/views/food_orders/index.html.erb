@@ -1,0 +1,27 @@
+<h1>Menu</h1>
+
+<%= link_to 'New menu item', new_food_order_path %>
+
+<br/>
+
+<table class="table table-striped">
+  <tr>
+    <th>Name</th>
+    <th># Ordered</th>
+    <th>% Ordered</th>
+    <th></th>
+  </tr>
+  <% @food_orders.sort_by(&:name).each do |food_order| %>
+    <tr>
+      <td><%= link_to food_order.name, food_order %></td>
+      <td><%= food_order.attendees.count %></td>
+      <td><%= Attendee.count == 0 ? '0.0' : food_order.attendees.count / Attendee.count * 100.0 %>%</td>
+      <td>
+        <ul>
+          <li><%= link_to 'Edit', edit_food_order_path(food_order) %></li>
+          <li><%= link_to 'Destroy', food_order, confirm: 'Are you sure?', method: :delete %></li>
+        </ul>
+      </td>
+    </tr>
+  <% end %>
+</table>

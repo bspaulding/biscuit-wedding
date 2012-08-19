@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @invitation.name %>
+</p>
+
+<p>
+  <b>Responded:</b>
+  <%= @invitation.responded %>
+</p>
+
+<p>
+  <b>Attendees (<%= @invitation.attendees.count %>)</b><br/>
+  <ul>
+    <% @invitation.attendees.each do |attendee| %>
+    <li><%= attendee.name %> would like <%= attendee.food_order.name.downcase %>.</li>
+    <% end %>
+  </ul>
+</p>
+
+<p>
+  <b>Total guests allowed:</b>
+  <%= @invitation.max_attendees %>
+</p>
+
+<%= link_to 'Edit', edit_invitation_path(@invitation) %> |
+<%= link_to 'Back', invitations_path %>

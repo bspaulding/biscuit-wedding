@@ -1,0 +1,79 @@
+<div id="invitations-app">
+<script type="text/x-handlebars">
+<h1>Invitations <small>({{Invitations.InvitationsController.filteredContent.length}})</small></h1>
+
+<%= link_to 'New Invitation', new_invitation_path %>
+
+<br/>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>
+        {{view Ember.Select contentBinding="Invitations.InvitationsController.respondedFilterOptions"
+                            selectionBinding="Invitations.InvitationsController.respondedFilter"
+                            optionLabelPath="content.label"
+                            optionValuePath="content.value"}}
+        <br/>
+        Responded
+      </th>
+      <th>Total guests allowed</th>
+      <th>
+        {{view Ember.Select contentBinding="Invitations.InvitationsController.attendingFilterOptions"
+                            selectionBinding="Invitations.InvitationsController.attendingFilter"
+                            optionLabelPath="content.label"
+                            optionValuePath="content.value"}}
+        <br/>
+        Total guests attending
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+  {{#if Invitations.InvitationsController.filteredContentEmpty}}
+    <tr>
+      <td colspan="5">No Invitations to browse.</td>
+    </tr>
+  {{else}}
+    {{#collection contentBinding="Invitations.InvitationsController.filteredContent" tagName="tbody"}}
+      <td>{{{content.show_link}}}</td>
+      <td>{{content.responded}}</td>
+      <td>{{content.max_attendees}}</td>
+      <td>{{content.num_attendees}}</td>
+      <td>
+        <ul>
+          <li>{{{content.edit_link}}}</li>
+          <li>{{{content.destroy_link}}}</li>
+        </ul>
+      </td>
+    {{/collection}}
+  {{/if}}
+  <tfoot>
+    <tr>
+      <th></th>
+      <th>
+        {{Invitations.InvitationsController.numResponded}} / {{Invitations.InvitationsController.filteredContent.length}}
+        ({{Invitations.InvitationsController.percentResponded}}%)
+      </th>
+      <th>{{Invitations.InvitationsController.totalGuestsAllowed}}</th>
+      <th>{{Invitations.InvitationsController.numAttendees}}</th>
+    </tr>
+  </tfoot>
+</table>
+</script>
+</div>
+
+<script>
+  var invitations = <%= Invitation.all.map {|invitation|
+    {
+      :name => invitation.name,
+      :responded => t(invitation.responded.to_s),
+      :max_attendees => invitation.max_attendees,
+      :num_attendees => invitation.attendees.count,
+      :show_link => link_to(invitation.name, invitation).html_safe,
+      :edit_link => link_to('Edit', edit_invitation_path(invitation)).html_safe,
+      :destroy_link => link_to('Destroy', invitation, confirm: 'Are you sure?', method: :delete)
+    }
+  }.to_json.html_safe %>;
+</script>
+<%= javascript_include_tag "jquery", "ember.min", "underscore-min", "invitations" %>

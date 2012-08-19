@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @guestbook_entry.name %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @guestbook_entry.body %>
+</p>
+
+
+<%= link_to 'Edit', edit_guestbook_entry_path(@guestbook_entry) %> |
+<%= link_to 'Back', guestbook_entries_path %>

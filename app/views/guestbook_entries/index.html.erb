@@ -1,0 +1,18 @@
+<h1>Guestbook <small>(<%= pluralize @guestbook_entries.count, 'entry' %>)</small></h1>
+
+<p style="float: left;"><%= link_to 'Sign the Guestbook &raquo;'.html_safe, new_guestbook_entry_path, :class => 'button' %></p>
+
+<ul id="guestbook_entries">
+<% @guestbook_entries.sort_by(&:created_at).reverse.each do |guestbook_entry| %>
+  <li>
+    <strong><%= guestbook_entry.name %></strong> says:<br/>
+    &#8220;<%= guestbook_entry.body %>&#8221;
+    <%#= link_to 'Edit', edit_guestbook_entry_path(guestbook_entry) %>
+    <%#= link_to 'Destroy', guestbook_entry, confirm: 'Are you sure?', method: :delete %>
+  </li>
+<% end %>
+</ul>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>

@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @food_order.name %></h1>
+
+<p>
+  <b>Ordered By (<%= @food_order.attendees.count %>)</b></br>
+  <ul>
+    <% @food_order.attendees.sort_by(&:name).each do |attendee| %>
+    <li><%= attendee.name %></li>
+    <% end %>
+  </ul>
+</p>
+
+<%= link_to 'Edit', edit_food_order_path(@food_order) %> |
+<%= link_to 'Back', food_orders_path %>

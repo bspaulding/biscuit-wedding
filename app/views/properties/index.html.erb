@@ -1,0 +1,24 @@
+<h1>Properties</h1>
+
+<div id="properties-app"></div>
+
+<script type="text/x-handlebars" data-template-name="properties-view">
+  <table class="table table-striped">
+    <tbody>
+    {{#collection contentBinding="Properties.propertiesController.content"}}
+      <tr>
+        <td>{{content.name}}</td>
+        <td>
+          {{view Ember.Select contentBinding="content.allowed_values"
+                              selectionBinding="content.value"}}
+        </td>
+      </tr>
+    {{/collection}}
+    </tbody>
+  </table>
+</script>
+
+<script>
+  var properties = <%= Property.all.to_json.html_safe %>;
+</script>
+<%= javascript_include_tag "application", "ember.min", "underscore-min", "properties-app" %>

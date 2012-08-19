@@ -1,14 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>BiscuitWedding</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
+  <title>Biscuit Wedding</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+  <link rel="stylesheet" href="stylesheets/html5reset-1.6.1.css"/>
+  <link rel="stylesheet" href="stylesheets/styles.css"/>
+
+<!--   <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %> -->
   <%= csrf_meta_tags %>
+
+  <!-- TypeKit -->
+  <!-- <link rel="stylesheet" href="stylesheets/typekit-cached.css"/> -->
+  <script type="text/javascript" src="http://use.typekit.net/ftb3rsw.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
 <body>
-
-<%= yield %>
-
+  <header>
+    <h1>Tony & Cecily</h1>
+    <nav class="mobile">
+      <ul>
+        <li><a href="#bottom-nav">Menu</a></li>
+      </ul>
+    </nav>
+    <nav>
+      <%= render :partial => 'shared/nav-list' %>
+    </nav>
+  </header>
+  <%= yield %>
+  <footer>
+    <nav id="bottom-nav" class="mobile">
+      <%= render :partial => 'shared/nav-list' %>
+    </nav>
+    <h5><a href="#top">Back to Top</a></h5>
+    <h6>Design by <a href="http://www.motingo.com/">Motingo</a>, Copyright 2012.</h6>
+  </footer>
 </body>
 </html>

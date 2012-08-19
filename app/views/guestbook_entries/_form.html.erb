@@ -1,0 +1,27 @@
+<%= form_for(@guestbook_entry) do |f| %>
+  <% if @guestbook_entry.errors.any? %>
+    <div id="error_explanation">
+      <h4><%= pluralize(@guestbook_entry.errors.count, "error") %> prohibited this <%= GuestbookEntry.model_name.human %> from being saved:</h4>
+      <ul>
+      <% @guestbook_entry.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :body %><br />
+    <%= f.text_area :body %>
+  </div>
+  <div class="field">
+    <%= recaptcha_tags %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Sign the Guestbook" %>
+  </div>
+<% end %>

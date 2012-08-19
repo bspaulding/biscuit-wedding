@@ -19,6 +19,8 @@ header { width: 100%; }
 
 h1,h2,h3,h4,h5,h6 {
   font-family: "acta-poster", verdana, sans-serif;
+  line-height: 64px;
+  text-transform: uppercase; font-weight: normal;
 
   -webkit-transition: 0.5s all ease-in-out;
   -moz-transition: 0.5s all ease-in-out;
@@ -26,7 +28,6 @@ h1,h2,h3,h4,h5,h6 {
 }
 h1 {
   font-size: 46px;
-  line-height: 64px;
 }
 article>h1 { font-size: 38px; }
 header>h1 { text-align: center; }
@@ -75,6 +76,7 @@ nav>ul>li>a {
 nav>ul>li>a:hover,
 nav>ul>li>a.active {
   border-color: rgba(40,40,40,1);
+  text-decoration: none;
 }
 nav>ul>li>a.active {
   -webkit-transform: rotate(-3deg);
@@ -87,10 +89,11 @@ nav>ul>li>a:hover {
   transform: rotate(3deg);
 }
 
-a:link, a:visited {
-  text-decoration: none;
-  color: inherit;
-}
+a:link, a:visited,
+a:hover, a:active { color: inherit; }
+
+a:link, a:visited { text-decoration: none; }
+a:hover, a:active { text-decoration: underline; }
 
 article {
   width: 100%;
@@ -130,24 +133,28 @@ footer>h6 {
   font-size: 14px;
   font-family: "acta-display", sans-serif;
   text-align: center;
+  text-transform: none;
 }
 footer>h5 { font-size: 16px; margin-bottom: 16px; }
 
 footer>nav {
   text-align: center;
   margin-bottom: 16px;
+  margin-top: 32px;
 }
 
+#rsvp-app h1,
+#rsvp-app h2,
+#rsvp-app h3,
+#rsvp-app h4,
+#rsvp-app h5,
+#rsvp-app h6 { font-weight: normal; }
 
-@media all and (max-width: 720px) { header>nav>ul>li>a { font-size: 18px; } }
-@media all and (max-width: 620px) { header>nav>ul>li>a { font-size: 16px; } }
-@media all and (max-width: 570px) {
+@media all and (max-width: 420px) {
   header>nav>ul>li>a { font-size: 24px; }
   header>nav { display: none; }
   nav.mobile { display: block; }
-}
 
-@media all and (max-width: 480px) {
   header>h1 { font-size: 36px; }
   article>h1 { font-size: 28px; }
 

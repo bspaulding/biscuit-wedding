@@ -1,6 +1,9 @@
 class PagesController < ApplicationController
   BiscuitWedding::Application::STATIC_PAGES.each do |action|
     define_method action do
+      if action == 'coming_soon'
+        render :layout => false
+      end
     end
   end
 

@@ -6,6 +6,8 @@ class Invitation < ActiveRecord::Base
   validates_presence_of [:name, :max_attendees]
   validate :number_of_attendees
 
+  attr_accessible :id, :name, :responded, :attendees_attributes
+
   def number_of_attendees
     Rails.logger.info "attendees.reject(&:marked_for_destruction?).size => #{attendees.reject(&:marked_for_destruction?).size}"
     unless (attendees.reject(&:marked_for_destruction?).size) <= max_attendees

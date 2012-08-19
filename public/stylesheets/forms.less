@@ -1,0 +1,128 @@
+/* Functions & Variables */
+
+@dark_color:  rgb(0,0,128);
+@light_color: lighten(@dark_color, 10%);
+
+@highlights: rgb(225,225,225);
+@dark_text_and_highlights: darken(@highlights, 3%);
+
+.transition(@args) {
+  -webkit-transition: @args;
+  -moz-transition: @args;
+  transition: @args;
+}
+
+.box_shadow(@args) {
+  -webkit-box-shadow: @args;
+  -moz-box-shadow: @args;
+  box-shadow: @args;
+}
+
+.background_gradient(@position: bottom, @start: white 0%, @end: black 100%) {
+  background-image:         linear-gradient(@position, @start, @end);
+  background-image:      -o-linear-gradient(@position, @start, @end);
+  background-image:    -moz-linear-gradient(@position, @start, @end);
+  background-image: -webkit-linear-gradient(@position, @start, @end);
+  background-image:     -ms-linear-gradient(@position, @start, @end);
+}
+
+.background_gradient_three(@position: bottom, @stop1: white 0%, @stop2: black 50%, @stop3: white 100%) {
+  background-image:         linear-gradient(@position, @stop1, @stop2, @stop3);
+  background-image:      -o-linear-gradient(@position, @stop1, @stop2, @stop3);
+  background-image:    -moz-linear-gradient(@position, @stop1, @stop2, @stop3);
+  background-image: -webkit-linear-gradient(@position, @stop1, @stop2, @stop3);
+  background-image:     -ms-linear-gradient(@position, @stop1, @stop2, @stop3);
+}
+
+/* Form Elements */
+
+input[type="text"],
+textarea,
+select {
+  margin: 11px 0px;
+  padding: 11px;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid @light_color;
+  border-radius: 6px;
+  font-size: 18px;
+  line-height: 32px;
+  color: @dark_color;
+  .box_shadow(0px 0px 11px @dark_color);
+  .background_gradient(bottom, #EFEFEF 0%, white 100%);
+
+  -webkit-transition: all 0.2s ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+input[type="text"]:-moz-placeholder { color: #ccc; }
+
+input[type="button"],
+input[type="submit"] { width: auto; }
+
+select,
+select:focus {
+  background: white url("../images/select-bg.png") no-repeat right center;
+  -webkit-background-size: 1600px 100%;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  .box_shadow(0px 0px 10px @highlights);
+  .background_gradient(top, #EFEFEF 0%, white 100%);
+}
+
+input[type="button"],
+input[type="submit"],
+button,
+a.button {
+  display: block;
+  float: left;
+  background: @dark_color;
+
+  .background_gradient(bottom, @light_color 11%, @dark_color 56%);
+
+  color: @highlights;
+  margin: 0px 22px 0px 0px;
+  padding: 11px;
+  font-size: 16px;
+  line-height: 32px;
+  font-family: "acta-display", sans-serif;
+  text-shadow: 0px -1px 0px @light_color;
+
+  .box_shadow(0px 1px 2px black);
+
+  border: 1px solid @light_color;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+input[type="button"]:hover,
+input[type="submit"]:hover,
+button:hover,
+a.button:hover {
+  cursor: pointer;
+  text-decoration: none;
+  background: lighten(@dark_color, 7%);
+  .background_gradient(bottom, lighten(@dark_color, 7%) 11%, lighten(@light_color, 7%) 56%);
+  text-shadow: 0px -1px 0px @light_color, 0px 0px 2px @light_color;
+}
+
+input[type="button"][disabled],
+input[type="submit"][disabled],
+              button[disabled],
+            a.button[disabled],
+input[type="button"][disabled]:hover,
+input[type="submit"][disabled]:hover,
+              button[disabled]:hover,
+            a.button[disabled]:hover {
+  cursor: default;
+  opacity: 0.5;
+  .background_gradient(bottom, @light_color 11%, @dark_color 56%);
+}

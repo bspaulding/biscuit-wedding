@@ -9,6 +9,8 @@ class Property < ActiveRecord::Base
 
   serialize :allowed_values, Array
 
+  attr_accessible :name, :key, :value, :allowed_values
+
   def self.seed
     SUPPORTED_PROPERTIES.each {|attributes| find_or_create_by_key(attributes) }
   end

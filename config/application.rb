@@ -11,7 +11,7 @@ end
 
 module BiscuitWedding
   class Application < Rails::Application
-    STATIC_PAGES = ['our-story', 'registry', 'location', 'accommodations']
+    STATIC_PAGES = ['coming_soon', 'our-story', 'registry', 'location', 'accommodations', 'contact_us']
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

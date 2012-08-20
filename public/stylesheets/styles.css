@@ -174,7 +174,7 @@ footer>nav {
   ol { list-style-position: inside; }
 }
 
-@media all and (max-width: 420px) {
+@media all and (max-width: 480px) {
   header>nav>ul>li>a { font-size: 24px; }
   header>nav { display: none; }
   nav.mobile { display: block; }

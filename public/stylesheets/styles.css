@@ -45,6 +45,12 @@ h6>small {
   font-size: 0.8em;
 }
 
+a:link, a:visited,
+a:hover, a:active { color: inherit; }
+
+a:link, a:visited { text-decoration: none; }
+a:hover, a:active { text-decoration: underline; }
+
 nav.mobile { display: none; }
 header>nav {
   float: left;
@@ -73,7 +79,9 @@ header>nav>ul>li {
   float: left;
   position: relative; right: 50%;
 }
-nav>ul>li>a {
+nav>ul>li>a,
+nav>ul>li>a:link,
+nav>ul>li>a:visited {
   margin: 0px 8px;
   padding: 0px 8px;
   font-weight: bolder;
@@ -102,12 +110,6 @@ nav>ul>li>a:hover {
   transform: rotate(3deg);
 }
 
-a:link, a:visited,
-a:hover, a:active { color: inherit; }
-
-a:link, a:visited { text-decoration: none; }
-a:hover, a:active { text-decoration: underline; }
-
 small { font-size: 0.9em; }
 
 article {
@@ -121,7 +123,10 @@ article>p:first-child,
 article>p.first { margin-top:    8px; }
 article>p:last-child  { margin-bottom: 0px; }
 article a:link,
-article a:visited { text-decoration: underline; }
+article a:visited {
+  color: rgb(238,130,238);
+  text-shadow: 0px 1px 0px rgba(225,225,225,0.3), 0px -1px 0px rgba(40,40,40,0.3);
+}
 
 ul { list-style-position: inside; }
 ol>li { margin: 16px 0px; }

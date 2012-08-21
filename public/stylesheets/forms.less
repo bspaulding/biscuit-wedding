@@ -36,6 +36,8 @@
 
 /* Form Elements */
 
+.field { margin-bottom: 32px; }
+
 input[type="text"],
 textarea,
 select {
@@ -80,7 +82,8 @@ select:focus {
 input[type="button"],
 input[type="submit"],
 button,
-a.button {
+a.button,
+article a.button, {
   display: block;
   float: left;
   background: @dark_color;
@@ -106,7 +109,8 @@ a.button {
 input[type="button"]:hover,
 input[type="submit"]:hover,
 button:hover,
-a.button:hover {
+a.button:hover,
+article a.button:hover {
   cursor: pointer;
   text-decoration: none;
   background: lighten(@dark_color, 7%);
@@ -118,10 +122,12 @@ input[type="button"][disabled],
 input[type="submit"][disabled],
               button[disabled],
             a.button[disabled],
+    article a.button[disabled],
 input[type="button"][disabled]:hover,
 input[type="submit"][disabled]:hover,
               button[disabled]:hover,
-            a.button[disabled]:hover {
+            a.button[disabled]:hover,
+    article a.button[disabled]:hover {
   cursor: default;
   opacity: 0.5;
   .background_gradient(bottom, @light_color 11%, @dark_color 56%);

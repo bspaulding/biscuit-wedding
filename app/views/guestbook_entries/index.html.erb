@@ -1,6 +1,6 @@
 <h1>Guestbook <small>(<%= pluralize @guestbook_entries.count, 'entry' %>)</small></h1>
 
-<p style="float: left;"><%= link_to 'Sign the Guestbook &raquo;'.html_safe, new_guestbook_entry_path, :class => 'button' %></p>
+<p class="first"><small><%= link_to 'Sign the Guestbook &raquo;'.html_safe, new_guestbook_entry_path %></small></p>
 
 <ul id="guestbook_entries">
 <% @guestbook_entries.sort_by(&:created_at).reverse.each do |guestbook_entry| %>
@@ -12,7 +12,3 @@
   </li>
 <% end %>
 </ul>
-
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>

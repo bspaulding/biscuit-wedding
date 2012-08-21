@@ -130,6 +130,10 @@ article a:visited {
 ul { list-style-position: inside; }
 ol>li { margin: 16px 0px; }
 
+ul#guestbook_entries {
+  list-style-type: none;
+}
+
 article>img {
   border-radius: 8px;
   border-width: 1px;

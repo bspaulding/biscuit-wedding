@@ -28,7 +28,9 @@
       <%= render :partial => 'shared/rsvp-stamp' if Property.check("allow-rsvp", 'true') %>
     </nav>
   </header>
-  <%= yield %>
+  <article>
+    <%= yield %>
+  </article>
   <footer>
     <nav id="bottom-nav" class="mobile">
       <%= render :partial => 'shared/nav-list' %>

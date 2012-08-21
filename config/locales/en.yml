@@ -2,14 +2,25 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  pages:
-    titles:
+  navigation:
+    'our-story': 'Our Story'
+    rsvp: 'RSVP'
+    registry: 'Registry'
+    location: 'Location'
+    accommodations: 'Accommodations'
+    contact_us: 'Contact Us'
+    guestbook: 'Guestbook'
+  titles:
+    pages:
       'our-story': 'Our Story'
       rsvp: 'RSVP'
       registry: 'Registry'
       location: 'Location'
       accommodations: 'Accommodations'
       contact_us: 'Contact Us'
+    guestbook_entries:
+      index: 'Guestbook Entries'
+      new: 'Sign the Guestbook'
   'true': 'Yes'
   'false': 'No'
   activerecord:

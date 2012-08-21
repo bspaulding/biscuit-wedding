@@ -1,7 +1,7 @@
 <ul>
   <% navigation_slugs.each do |slug| %>
     <li>
-      <%= link_to t("pages.titles.#{slug}"), "/#{slug}", :class => (action_name == slug ? "active" : '') %>
+      <%= link_to t("navigation.#{slug}"), "/#{slug}", :class => (action_name == slug ? "active" : '') %>
     </li>
   <% end %>
 </ul>

@@ -115,7 +115,9 @@ RSVP.Invitation = Ember.Object.extend({
                         id: this.get('id'),
                       name: this.get('name'),
                  responded: this.get('responded'),
-      attendees_attributes: _.map(this.get('attendees').get('content'), function(a) { return a.get('asJSON'); })
+      attendees_attributes: _.map(this.get('attendees').get('content'), function(a) { return a.get('asJSON'); }),
+                 attending: this.get('attending').get('value'),
+      attending_ne_reception: this.get('attendingNeReception').get('value')
     };
   }.property('name', 'attendees.@each.name', 'attendees.@each.food_order_id')
 });
@@ -246,6 +248,17 @@ RSVP.InvitationView = Ember.View.extend({
 
     return options;
   }.property('maxAttendees').cacheable(),
+
+  attendingOptions: function() {
+    return [
+      Ember.Object.create({ value: true, label: "I'll be there!" }),
+      Ember.Object.create({ value: false, label: "Sorry, but I can't make it!" })
+    ];
+  }.property('').cacheable(),
+
+  attendingNeReceptionOptions: function() {
+    return this.get('attendingOptions');
+  }.property('').cacheable(),
 
   updateInvitation: function() {
     var invitation = this.get('invitation');

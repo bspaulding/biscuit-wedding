@@ -22,19 +22,20 @@
 
 <script type="text/x-handlebars" data-template-name="setup-attendees">
 <h2>{{invitation.name}}</h2>
-<div class="field num-attendees">
-  {{view Ember.Select contentBinding="numAttendeesOptions" selectionBinding="numAttendees"}}
-  <label>
-    {{#if multipleAttendees}}people{{else}}person{{/if}} will be attending.
-  </label>
+<div class="field attending">
+  <label>Are you coming to the wedding in San Diego?</label>
+  {{view Ember.Select contentBinding="attendingOptions"
+                    selectionBinding="invitation.attending"
+                     optionValuePath="content.value"
+                     optionLabelPath="content.label"}}
 </div>
-
-{{#if isAttending}}
-  <h4>Guests names (including you!)</h4>
-  {{collection contentBinding="invitation.attendees" itemViewClass="RSVP.AttendeeView" tagName="ol"}}
-{{else}}
-  <h4>Bummer! We wish you could be there!</h4>
-{{/if}}
+<div class="field attending-ne-reception">
+  <label>What about the reception in New England?</label>
+  {{view Ember.Select contentBinding="attendingNeReceptionOptions"
+                    selectionBinding="invitation.attendingNeReception"
+                     optionValuePath="content.value"
+                     optionLabelPath="content.label"}}
+</div>
 <input type="button" value="I'm Done!" {{action "updateInvitation"}} {{bindAttr disabled="invitation.isInvalid"}}/>
 <p style="text-align: center; float: left; clear: both; width: 100%;"><em><br/>Please <%= link_to "contact us", :controller => :pages, :action => :contact_us %> if you have trouble RSVP'ing.</em></p>
 </script>

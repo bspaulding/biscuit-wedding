@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120619000819) do
+ActiveRecord::Schema.define(:version => 20120826174851) do
 
   create_table "attendees", :force => true do |t|
     t.string   "name"
@@ -38,9 +38,10 @@ ActiveRecord::Schema.define(:version => 20120619000819) do
     t.integer  "max_attendees"
     t.boolean  "responded"
     t.boolean  "attending"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
     t.string   "name"
+    t.boolean  "attending_ne_reception"
   end
 
   create_table "properties", :force => true do |t|

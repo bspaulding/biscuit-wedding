@@ -34,7 +34,9 @@
           <a class="brand" href="/">tonyandcecily.com</a>
           <div class="container-fluid nav-collapse">
             <ul class="nav">
-              <li><%= link_to "Menu", "/food_orders"  %></li>
+              <% if Property.check('menu-items-enabled', 'true') %>
+                <li><%= link_to "Menu", "/food_orders"  %></li>
+              <% end %>
               <li><%= link_to "Invitations", "/invitations"  %></li>
               <li><%= link_to "Properties", "/properties"  %></li>
             </ul>

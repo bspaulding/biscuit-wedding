@@ -15,6 +15,10 @@ var RSVP = Ember.Application.create({
       this.importObjects(window.invitations, RSVP.Invitation, RSVP.InvitationsController);
     }
 
+    if ( 'undefined' != typeof window.foodOrdersEnabled ) {
+      this.set('foodOrdersEnabled', window.foodOrdersEnabled);
+    }
+
     if ( window.food_orders ) {
       this.importObjects(window.food_orders, RSVP.FoodOrder, RSVP.FoodOrdersController);
     }

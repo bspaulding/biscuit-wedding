@@ -41,25 +41,22 @@
 
 <script type="text/x-handlebars" data-template-name="attendee-view">
   {{view Ember.TextField valueBinding="content.name" placeholder="Guest Name"}}
-  {{view Ember.Select contentBinding="RSVP.FoodOrdersController.content"
-                      selectionBinding="content.food_order"
-                      optionLabelPath="content.prompt"
-                      optionValuePath="content.id"
-                      prompt="will have the..."}}
+  {{#if RSVP.foodOrdersEnabled}}
+    {{view Ember.Select contentBinding="RSVP.FoodOrdersController.content"
+                        selectionBinding="content.food_order"
+                        optionLabelPath="content.prompt"
+                        optionValuePath="content.id"
+                        prompt="will have the..."}}
+  {{/if}}
 </script>
 
 <script type="text/x-handlebars" data-template-name="thanks-view">
-  <h2>Thank you for responding!</h2>
-  <a href="http://www.tkqlhce.com/click-3982900-10876589" class="button" target="_blank" style="margin-top: 33px;">
-    View Registry &raquo;
-  </a>
-  <p>&nbsp;</p>
+  <h2 style="text-align: center;">Thank you for responding!</h2>
 </script>
-
-<p>&nbsp;</p>
 
 <script>
   var invitations = <%= Invitation.all(:include => :attendees).to_json(:methods => [:attendees]).html_safe %>;
   var food_orders = <%= FoodOrder.all(:order => :name).to_json.html_safe %>;
+  var foodOrdersEnabled = <%= Property.check("menu-items-enabled", "true") %>;
 </script>
 <%= javascript_include_tag "application", "ember.min", "underscore-min", "rsvp-app" %>

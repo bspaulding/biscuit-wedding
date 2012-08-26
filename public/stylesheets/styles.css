@@ -197,7 +197,7 @@ footer>nav>#rsvp-stamp {
 
 @media all and (max-width: 480px) {
   header>nav>ul>li>a { font-size: 24px; }
-  header>nav { display: none; }
+  header>nav { display: none; margin-bottom: 32px; }
   nav.mobile { display: block; }
 
   header>h1 { font-size: 36px; }

@@ -23,6 +23,9 @@ en:
       new: 'Sign the Guestbook'
   'true': 'Yes'
   'false': 'No'
+  pages:
+    rsvp:
+      attendee_name_label: "Please enter your first and last name:"
   activerecord:
     models:
       food_order:

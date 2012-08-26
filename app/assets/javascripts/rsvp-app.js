@@ -29,6 +29,10 @@ var RSVP = Ember.Application.create({
       }
     }
 
+    if ( 'undefined' != typeof window.plusOnesEnabled ) {
+      this.set('plusOnesEnabled', window.plusOnesEnabled);
+    }
+
     var lookupInvitationView = RSVP.LookupInvitationView.create();
     lookupInvitationView.appendTo(this.get('rootElement'));
   },
@@ -111,12 +115,14 @@ RSVP.Invitation = Ember.Object.extend({
   },
 
   asJSON: function() {
-    return {
+    var hash = {
                         id: this.get('id'),
                       name: this.get('name'),
                  responded: this.get('responded'),
       attendees_attributes: _.map(this.get('attendees').get('content'), function(a) { return a.get('asJSON'); })
     };
+    console.log(hash);
+    return hash;
   }.property('name', 'attendees.@each.name', 'attendees.@each.food_order_id')
 });
 
@@ -138,7 +144,13 @@ RSVP.Attendee = Ember.Object.extend({
   }.property('food_order').cacheable(),
 
   isValid: function() {
-    return !!this.get('isDestroyed') || (this.get('name') && this.get('name').length > 0 && this.get('food_order_id') !== null);
+    if ( RSVP.get('plusOnesEnabled') ) {
+      var attendeeFieldsValid = (this.get('name') && this.get('name').length > 0 && this.get('food_order_id') !== null);
+    } else {
+      var attendeeFieldsValid = (this.get('name') && this.get('name').length > 0);
+    }
+
+    return !!this.get('isDestroyed') || attendeeFieldsValid;
   }.property('food_order_id'),
 
   isDestroyed: null,
@@ -208,7 +220,12 @@ RSVP.InvitationView = Ember.View.extend({
   numAttendees: null,
   numAttendeesChanged: function() {
     var numAttendees = this.get('numAttendees');
-    if ( 'undefined' === typeof numAttendees || numAttendees == null ) { return; }
+    if ( 'undefined' === typeof numAttendees || numAttendees == null ) {
+      if ( !RSVP.get("plusOnesEnabled") ) {
+        numAttendees = 0;
+        this.set('numAttendees', 0);
+      } else { return; }
+    }
 
     var invitation = this.get('invitation');
     var attendees = invitation.get('attendees');
@@ -221,6 +238,9 @@ RSVP.InvitationView = Ember.View.extend({
       console.log('Add new attendees');
       for ( var i = 0; i < difference; i += 1 ) {
         var attendee = RSVP.Attendee.create();
+        if ( !RSVP.get("plusOnesEnabled") ) {
+          attendee.set('name', invitation.name);
+        }
         attendees.addObject(attendee);
       }
     } else if ( difference < 0 ) {
@@ -238,14 +258,21 @@ RSVP.InvitationView = Ember.View.extend({
   }.property('numAttendees').cacheable(),
 
   numAttendeesOptions: function() {
+    if ( !RSVP.get('plusOnesEnabled') ) {
+      return [
+        Ember.Object.create({ label: "I will be attending, see you there!", value: 1 }),
+        Ember.Object.create({ label: "Unfortunately, I can't make it. Have fun without me!", value: 0 })
+      ];
+    }
+
     var options = [];
 
     for ( var i = 0; i <= this.get('maxAttendees'); i += 1 ) {
-      options.push(i);
+      options.push(Ember.Object.create({ label: i, value: i }));
     }
 
     return options;
-  }.property('maxAttendees').cacheable(),
+  }.property('maxAttendees, RSVP.plusOnesEnabled').cacheable(),
 
   updateInvitation: function() {
     var invitation = this.get('invitation');

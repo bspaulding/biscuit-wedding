@@ -23,15 +23,22 @@
 <script type="text/x-handlebars" data-template-name="setup-attendees">
 <h2>{{invitation.name}}</h2>
 <div class="field num-attendees">
-  {{view Ember.Select contentBinding="numAttendeesOptions" selectionBinding="numAttendees"}}
-  <label>
-    {{#if multipleAttendees}}people{{else}}person{{/if}} will be attending.
-  </label>
+  {{view Ember.Select contentBinding="numAttendeesOptions"
+                    selectionBinding="numAttendees"
+                     optionLabelPath="content.label"
+                     optionValuePath="content.value"}}
+  {{#if RSVP.plusOnesEnabled}}
+    <label>
+      {{#if multipleAttendees}}people{{else}}person{{/if}} will be attending.
+    </label>
+  {{/if}}
 </div>
 
 {{#if isAttending}}
-  <h4>Guests names (including you!)</h4>
-  {{collection contentBinding="invitation.attendees" itemViewClass="RSVP.AttendeeView" tagName="ol"}}
+  {{#if RSVP.plusOnesEnabled}}
+    <h4>Guests names (including you!)</h4>
+    {{collection contentBinding="invitation.attendees" itemViewClass="RSVP.AttendeeView" tagName="ol"}}
+  {{/if}}
 {{else}}
   <h4>Bummer! We wish you could be there!</h4>
 {{/if}}
@@ -58,5 +65,6 @@
   var invitations = <%= Invitation.all(:include => :attendees).to_json(:methods => [:attendees]).html_safe %>;
   var food_orders = <%= FoodOrder.all(:order => :name).to_json.html_safe %>;
   var foodOrdersEnabled = <%= Property.check("menu-items-enabled", "true") %>;
+  var plusOnesEnabled = <%= Property.check("plus-ones-enabled", "true") %>;
 </script>
 <%= javascript_include_tag "application", "ember.min", "underscore-min", "rsvp-app" %>

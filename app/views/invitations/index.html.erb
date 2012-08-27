@@ -10,6 +10,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Event</th>
       <th>
         {{view Ember.Select contentBinding="Invitations.InvitationsController.respondedFilterOptions"
                             selectionBinding="Invitations.InvitationsController.respondedFilter"
@@ -37,6 +38,7 @@
   {{else}}
     {{#collection contentBinding="Invitations.InvitationsController.filteredContent" tagName="tbody"}}
       <td>{{{content.show_link}}}</td>
+      <td>{{content.event_name}}</td>
       <td>{{content.responded}}</td>
       <td>{{content.max_attendees}}</td>
       <td>{{content.num_attendees}}</td>
@@ -67,6 +69,7 @@
   var invitations = <%= Invitation.all.map {|invitation|
     {
       :name => invitation.name,
+      :event_name => invitation.event.try(:name),
       :responded => t(invitation.responded.to_s),
       :max_attendees => invitation.max_attendees,
       :num_attendees => invitation.attendees.count,

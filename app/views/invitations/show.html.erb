@@ -6,6 +6,11 @@
 </p>
 
 <p>
+  <b>Event:</b>
+  <%= @invitation.event.try(:name) %>
+</p>
+
+<p>
   <b>Responded:</b>
   <%= @invitation.responded %>
 </p>

@@ -23,6 +23,7 @@ var Invitations = Ember.Application.create({
 Invitations.Invitation = Ember.Object.extend({
   id: null,
   name: null,
+  event_name: null,
   max_attendees: null,
   num_attendees: null,
   attending: function() {

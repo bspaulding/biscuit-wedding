@@ -1,4 +1,5 @@
 class Invitation < ActiveRecord::Base
+  belongs_to :event
   has_many :attendees
 
   accepts_nested_attributes_for :attendees, :allow_destroy => true
@@ -6,7 +7,7 @@ class Invitation < ActiveRecord::Base
   validates_presence_of [:name, :max_attendees]
   validate :number_of_attendees
 
-  attr_accessible :id, :name, :responded, :attendees_attributes, :max_attendees
+  attr_accessible :id, :name, :responded, :attendees_attributes, :max_attendees, :event_id
 
   def number_of_attendees
     Rails.logger.info "attendees.reject(&:marked_for_destruction?).size => #{attendees.reject(&:marked_for_destruction?).size}"

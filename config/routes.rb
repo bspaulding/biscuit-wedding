@@ -2,6 +2,7 @@ BiscuitWedding::Application.routes.draw do
   root :to => "pages#our-story"
 
   resources :food_orders
+  resources :events
   resources :invitations
   resources :properties
   resources :guestbook_entries

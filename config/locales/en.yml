@@ -18,6 +18,7 @@ en:
       location: 'Location'
       accommodations: 'Accommodations'
       contact_us: 'Contact Us'
+      photos: 'Photos'
     guestbook_entries:
       index: 'Guestbook Entries'
       new: 'Sign the Guestbook'

@@ -135,7 +135,7 @@ ul#guestbook_entries {
   list-style-type: none;
 }
 
-article>img {
+article img {
   border-radius: 8px;
   border-width: 1px;
   border-style: solid;
@@ -144,7 +144,7 @@ article>img {
   border-bottom-color: rgba(225,225,225,0.4);
   border-right-color:  rgba(225,225,225,0.4);
 }
-article>img,
+article img,
 img.left  { float: left;  margin-left:  0px; margin-right: 32px; margin-top: 16px; margin-bottom: 0px; }
 img.right { float: right; margin-right: 0px; margin-left:  32px; margin-top: 16px; margin-bottom: 0px; }
 img.tall {
@@ -154,6 +154,10 @@ img.tall {
 img.wide {
   height: 256px;
   max-height: 256px;
+}
+
+.thumbnails>img:nth-child(even) {
+  margin-right: 0px;
 }
 
 footer { float: left; width: 100%; margin: 16px 0px; }

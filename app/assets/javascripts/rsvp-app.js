@@ -138,8 +138,12 @@ RSVP.Attendee = Ember.Object.extend({
   }.property('food_order').cacheable(),
 
   isValid: function() {
-    return !!this.get('isDestroyed') || (this.get('name') && this.get('name').length > 0 && this.get('food_order_id') !== null);
-  }.property('food_order_id'),
+    if ( RSVP.get('foodOrdersEnabled') ) {
+      return !!this.get('isDestroyed') || (this.get('name') && this.get('name').length > 0 && this.get('food_order_id') !== null);
+    } else {
+      return !!this.get('isDestroyed') || (this.get('name') && this.get('name').length > 0);
+    }
+  }.property('food_order_id', 'name', 'RSVP.foodOrdersEnabled', 'isDestroyed'),
 
   isDestroyed: null,
 
@@ -160,10 +164,15 @@ RSVP.LookupInvitationView = Ember.View.extend({
   loadInvitation: function() {
     var nameInput = this.$('input[type="text"]')[0];
     var name = nameInput.value;
-    var invitation = _.find(RSVP.InvitationsController.get('content'), function(i) {
-      return i.get('name') === name;
+    var invitations = _.select(RSVP.InvitationsController.get('content'), function(i) {
+      return i.get('name').toLowerCase() === name.toLowerCase();
     });
-    if ( invitation ) {
+    if ( invitations.length > 0 ) {
+      invitations = _.sortBy(invitations, function(i) { return i.event_id; });
+      RSVP.set('selectedInvitations', invitations);
+      var invitation = invitations[0];
+      RSVP.set('currentInvitation', invitation);
+
       this.set('error', false);
       invitationView = RSVP.InvitationView.create();
       invitationView.set('invitation', invitation);
@@ -204,6 +213,15 @@ RSVP.InvitationView = Ember.View.extend({
 
     return 0;
   }.property('invitation').cacheable(),
+
+  event_title: function() {
+    var invitation = this.get('invitation');
+    if ( invitation.get('event_title') ) {
+      return invitation.get('event_title');
+    } else {
+      return "this event";
+    }
+  }.property('invitation.event_id').cacheable(),
 
   numAttendees: null,
   numAttendeesChanged: function() {
@@ -257,10 +275,27 @@ RSVP.InvitationView = Ember.View.extend({
   },
 
   updateInvitationSuccess: function() {
-    var thanksView = RSVP.ThanksView.create();
-    this.remove();
-    thanksView.appendTo(RSVP.get('rootElement'));
-  }
+    var selectedInvitations = RSVP.get('selectedInvitations');
+    var currentInvitationIndex = selectedInvitations.indexOf(this.get('invitation'));
+    if ( currentInvitationIndex != selectedInvitations.length - 1 ) {
+      var nextInvitation = selectedInvitations.objectAt(currentInvitationIndex + 1);
+      RSVP.set('currentInvitation', nextInvitation);
+      this.set('invitation', nextInvitation);
+    } else {
+      var thanksView = RSVP.ThanksView.create();
+      this.remove();
+      thanksView.appendTo(RSVP.get('rootElement'));
+    }
+  },
+
+  buttonLabel: function() {
+    var selectedInvitations = RSVP.get('selectedInvitations');
+    if ( selectedInvitations.indexOf(this.get('invitation')) != selectedInvitations.length - 1 ) {
+      return "Continue &raquo;";
+    } else {
+      return "I'm Done!";
+    }
+  }.property('RSVP.currentInvitation', 'RSVP.selectedInvitations', 'invitation').cacheable()
 });
 
 RSVP.AttendeeView = Ember.View.extend({

@@ -23,6 +23,7 @@
 <script type="text/x-handlebars" data-template-name="setup-attendees">
 <h2>{{invitation.name}}</h2>
 <div class="field num-attendees">
+  <label>How many people will be coming to {{event_title}}?</label>
   {{view Ember.Select contentBinding="numAttendeesOptions" selectionBinding="numAttendees"}}
   <label>
     {{#if multipleAttendees}}people{{else}}person{{/if}} will be attending.
@@ -32,10 +33,8 @@
 {{#if isAttending}}
   <h4>Guests names (including you!)</h4>
   {{collection contentBinding="invitation.attendees" itemViewClass="RSVP.AttendeeView" tagName="ol"}}
-{{else}}
-  <h4>Bummer! We wish you could be there!</h4>
 {{/if}}
-<input type="button" value="I'm Done!" {{action "updateInvitation"}} {{bindAttr disabled="invitation.isInvalid"}}/>
+<input type="button" {{bindAttr value="buttonLabel"}} {{action "updateInvitation"}} {{bindAttr disabled="invitation.isInvalid"}}/>
 <p style="text-align: center; float: left; clear: both; width: 100%;"><em><br/>Please <%= link_to "contact us", :controller => :pages, :action => :contact_us %> if you have trouble RSVP'ing.</em></p>
 </script>
 
@@ -55,7 +54,7 @@
 </script>
 
 <script>
-  var invitations = <%= Invitation.all(:include => :attendees).to_json(:methods => [:attendees]).html_safe %>;
+  var invitations = <%= Invitation.all(:include => :attendees).to_json(:methods => [:attendees, :event_title]).html_safe %>;
   var food_orders = <%= FoodOrder.all(:order => :name).to_json.html_safe %>;
   var foodOrdersEnabled = <%= Property.check("menu-items-enabled", "true") %>;
 </script>

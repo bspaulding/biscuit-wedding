@@ -15,4 +15,8 @@ class Invitation < ActiveRecord::Base
       errors.add(:attendees, "is limited to #{max_attendees} attendees.")
     end
   end
+
+  def event_title
+    event.title
+  end
 end

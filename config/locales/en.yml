@@ -26,6 +26,11 @@ en:
   pages:
     rsvp:
       attendee_name_label: "Please enter your first and last name:"
+  events:
+    wedding:
+      title: "the wedding in San Diego"
+    new_england_reception:
+      title: "the reception in New England"
   activerecord:
     models:
       food_order:

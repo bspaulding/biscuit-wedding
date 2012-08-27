@@ -6,4 +6,8 @@ class Event < ActiveRecord::Base
   validates_presence_of :name
 
   attr_accessible :name
+
+  def title
+    I18n.t("events.#{name.underscore}.title")
+  end
 end

@@ -180,7 +180,7 @@ footer>nav {
 #rsvp-app h6 { font-weight: normal; }
 
 #rsvp-stamp {
-  position: absolute; top: -16px; right: -32px;
+  position: absolute; top: 0px; right: -0px;
   z-index: 1;
   width: 128px;
   height: 128px;
@@ -196,6 +196,7 @@ footer>nav>#rsvp-stamp {
 }
 
 @media all and (max-width: 480px) {
+  header>#rsvp-stamp { display: none; }
   header>nav>ul>li>a { font-size: 24px; }
   header>nav { display: none; margin-bottom: 32px; }
   nav.mobile { display: block; }

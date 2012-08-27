@@ -16,16 +16,15 @@
 </head>
 <body>
   <header>
+    <%= render :partial => 'shared/rsvp-stamp', :locals => { :placement => :top } if Property.check("allow-rsvp", 'true') %>
     <h1>Tony & Cecily</h1>
     <nav class="mobile">
       <ul>
         <li><a href="#bottom-nav">Menu</a></li>
       </ul>
-      <%= render :partial => 'shared/rsvp-stamp' if Property.check("allow-rsvp", 'true') %>
     </nav>
     <nav>
       <%= render :partial => 'shared/nav-list' %>
-      <%= render :partial => 'shared/rsvp-stamp' if Property.check("allow-rsvp", 'true') %>
     </nav>
   </header>
   <article>
@@ -34,7 +33,7 @@
   <footer>
     <nav id="bottom-nav" class="mobile">
       <%= render :partial => 'shared/nav-list' %>
-      <%= render :partial => 'shared/rsvp-stamp' if Property.check("allow-rsvp", 'true') %>
+      <%= render :partial => 'shared/rsvp-stamp', :locals => { :placement => :bottom } if Property.check("allow-rsvp", 'true') %>
     </nav>
     <h5><a href="#top">Back to Top</a></h5>
     <h6>Design by <a href="http://www.motingo.com/">Motingo</a>, Copyright 2012. | <%= link_to "Admin", "/admin" %></h6>

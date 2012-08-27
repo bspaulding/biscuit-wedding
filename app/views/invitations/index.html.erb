@@ -10,7 +10,14 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Event</th>
+      <th>
+        {{view Ember.Select contentBinding="Invitations.InvitationsController.eventNameFilterOptions"
+                            selectionBinding="Invitations.InvitationsController.eventNameFilter"
+                            optionLabelPath="content.label"
+                            optionValuePath="content.value"}}
+        <br/>
+        Event
+      </th>
       <th>
         {{view Ember.Select contentBinding="Invitations.InvitationsController.respondedFilterOptions"
                             selectionBinding="Invitations.InvitationsController.respondedFilter"

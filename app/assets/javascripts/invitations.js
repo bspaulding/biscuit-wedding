@@ -41,6 +41,28 @@ Invitations.Invitation = Ember.Object.extend({
 Invitations.InvitationsController = Ember.ArrayProxy.create({
   content: [],
 
+  eventNameFilter: '',
+  eventNameFilterOptions: function() {
+    var options = [
+      { label: 'All', value: '' }
+    ];
+
+    var event_names = _.map(this.get('content'), function(invitation) {
+      return invitation.get('event_name');
+    });
+    event_names = _.uniq(event_names);
+
+    for ( var i = 0; i < event_names.length; i += 1 ) {
+      var event_name = event_names[i];
+      options.push({
+        label: event_name,
+        value: event_name
+      });
+    }
+
+    return options;
+  }.property('content.@each.event_name').cacheable(),
+
   respondedFilter: '',
   respondedFilterOptions: [
     { label: 'Filter by responded...',  value: ''    },
@@ -68,8 +90,13 @@ Invitations.InvitationsController = Ember.ArrayProxy.create({
       content = content.filterProperty('attending', attendingFilter);
     }
 
+    var eventNameFilter = this.get('eventNameFilter').value;
+    if ( eventNameFilter && eventNameFilter.length > 0 ) {
+      content = content.filterProperty('event_name', eventNameFilter);
+    }
+
     return content;
-  }.property('content', 'respondedFilter', 'attendingFilter').cacheable(),
+  }.property('content', 'respondedFilter', 'attendingFilter', 'eventNameFilter').cacheable(),
 
   filteredContentEmpty: function() {
     return this.get('filteredContent').get('length') === 0;

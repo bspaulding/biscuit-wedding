@@ -279,8 +279,20 @@ RSVP.InvitationView = Ember.View.extend({
     var currentInvitationIndex = selectedInvitations.indexOf(this.get('invitation'));
     if ( currentInvitationIndex != selectedInvitations.length - 1 ) {
       var nextInvitation = selectedInvitations.objectAt(currentInvitationIndex + 1);
+      nextInvitation.set('numAttendees', this.getPath('invitation.numAttendees'));
+
+      if ( nextInvitation.getPath('attendees.length') === 0 ) {
+        var currentAttendees = this.getPath('invitation.attendees');
+        for ( var i = 0; i < currentAttendees.length; i += 1 ) {
+          var currentAttendee = currentAttendees.objectAt(i);
+          var newAttendee = RSVP.Attendee.create({ name: currentAttendee.get('name') });
+          nextInvitation.get('attendees').addObject(newAttendee);
+        }
+      }
+
       RSVP.set('currentInvitation', nextInvitation);
       this.set('invitation', nextInvitation);
+      this.numAttendeesChanged();
     } else {
       var thanksView = RSVP.ThanksView.create();
       this.remove();

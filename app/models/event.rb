@@ -8,6 +8,6 @@ class Event < ActiveRecord::Base
   attr_accessible :name
 
   def title
-    I18n.t("events.#{name.underscore}.title")
+    I18n.t("events.#{name.underscore.gsub(' ', '_')}.title")
   end
 end

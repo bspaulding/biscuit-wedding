@@ -1,6 +1,7 @@
 body {
   margin: 32px auto;
   width: 90%;
+  overflow-x: hidden;
   background-image: url('../images/paper-texture-dark-low.jpg');
 
 /*  background-image: url('../images/grid-bg-32px.png');

@@ -23,7 +23,7 @@
 <script type="text/x-handlebars" data-template-name="setup-attendees">
 <h2>{{invitation.name}}</h2>
 <div class="field num-attendees">
-  <label>How many people will be coming to {{event_title}}?</label>
+  <label>How many people will be coming to <strong>{{event_title}}?</strong></label>
   {{view Ember.Select contentBinding="numAttendeesOptions" selectionBinding="numAttendees"}}
   <label>
     {{#if multipleAttendees}}people{{else}}person{{/if}} will be attending.

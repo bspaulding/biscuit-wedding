@@ -1,0 +1,20 @@
+<h1>Attendees</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Attendee Name</th>
+      <th>Invitation Name</th>
+      <th>Event</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @attendees.each do |attendee| %>
+      <tr>
+        <td><%= attendee.name %></td>
+        <td><%= attendee.invitation.name %></td>
+        <td><%= attendee.invitation.event.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

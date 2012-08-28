@@ -4,6 +4,7 @@ BiscuitWedding::Application.routes.draw do
   resources :food_orders
   resources :events
   resources :invitations
+  resources :attendees, :only => [:index]
   resources :properties
   resources :guestbook_entries
 

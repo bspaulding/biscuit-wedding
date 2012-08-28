@@ -186,7 +186,7 @@ footer>nav {
 
 .attendee-view.is-destroyed { display: none; }
 
-#rsvp-stamp {
+.rsvp-stamp {
   position: absolute; top: 0px; right: -0px;
   z-index: 1;
   width: 128px;
@@ -194,7 +194,7 @@ footer>nav {
 
   opacity: 0.8;
 }
-footer>nav>#rsvp-stamp {
+footer>nav>.rsvp-stamp {
   top: auto; bottom: -64px;
 }
 
@@ -203,7 +203,7 @@ footer>nav>#rsvp-stamp {
 }
 
 @media all and (max-width: 480px) {
-  header>#rsvp-stamp { display: none; }
+  header>.rsvp-stamp { display: none; }
   header>nav>ul>li>a { font-size: 24px; }
   header>nav { display: none; margin-bottom: 32px; }
   nav.mobile { display: block; }

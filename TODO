@@ -1,3 +1,2 @@
-- Photo Gallery
-- Adjust iPad breakpoint / navigation font sizes
 - Fix button styles. Gross.
+- Add AttendeesController for admin.

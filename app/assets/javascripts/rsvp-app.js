@@ -283,7 +283,9 @@ RSVP.InvitationView = Ember.View.extend({
       nextInvitation.set('numAttendees', this.getPath('invitation.numAttendees'));
 
       if ( nextInvitation.getPath('attendees.length') === 0 ) {
-        var currentAttendees = this.getPath('invitation.attendeesNotDestroyed');
+        var currentAttendees = this.getPath('invitation.attendees').filter(function(item, index, self) {
+          return !(!!item.get('isDestroyed'));
+        });
         for ( var i = 0; i < currentAttendees.length; i += 1 ) {
           var currentAttendee = currentAttendees.objectAt(i);
           var newAttendee = RSVP.Attendee.create();

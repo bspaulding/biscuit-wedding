@@ -184,6 +184,8 @@ footer>nav {
 #rsvp-app h5,
 #rsvp-app h6 { font-weight: normal; }
 
+.attendee-view.is-destroyed { display: none; }
+
 #rsvp-stamp {
   position: absolute; top: 0px; right: -0px;
   z-index: 1;

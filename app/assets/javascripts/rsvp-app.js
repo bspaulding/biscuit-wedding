@@ -228,24 +228,25 @@ RSVP.InvitationView = Ember.View.extend({
     var numAttendees = this.get('numAttendees');
     if ( 'undefined' === typeof numAttendees || numAttendees == null ) { return; }
 
-    var invitation = this.get('invitation');
-    var attendees = invitation.get('attendees');
-    var difference = numAttendees - attendees.filter(function(item, index, self) {
+    var numNotDestroyedAttendees = this.getPath('invitation.attendees').filter(function(item, index, self) {
       return !(!!item.get('isDestroyed'));
     }).length;
+    var difference = numAttendees - numNotDestroyedAttendees;
 
     if ( difference > 0 ) {
       // Add new attendees
-      console.log('Add new attendees');
       for ( var i = 0; i < difference; i += 1 ) {
         var attendee = RSVP.Attendee.create();
-        attendees.addObject(attendee);
+        this.getPath('invitation.attendees').addObject(attendee);
       }
     } else if ( difference < 0 ) {
       // Truncate list
       for ( var i = 0; i < (difference * -1); i += 1 ) {
-        attendees.objectAt(attendees.get('length') - 1).set('isDestroyed', true);
+        this.getPath('invitation.attendees').objectAt(this.getPath('invitation.attendees.length') - 1).set('isDestroyed', true);
       }
+
+      // NOTE to my future self, it is assumed that the following css rule exists:
+      //   .attendee-view.is-destroyed { display: none; }
     }
   }.observes('numAttendees'),
   isAttending: function() {
@@ -282,10 +283,11 @@ RSVP.InvitationView = Ember.View.extend({
       nextInvitation.set('numAttendees', this.getPath('invitation.numAttendees'));
 
       if ( nextInvitation.getPath('attendees.length') === 0 ) {
-        var currentAttendees = this.getPath('invitation.attendees');
+        var currentAttendees = this.getPath('invitation.attendeesNotDestroyed');
         for ( var i = 0; i < currentAttendees.length; i += 1 ) {
           var currentAttendee = currentAttendees.objectAt(i);
-          var newAttendee = RSVP.Attendee.create({ name: currentAttendee.get('name') });
+          var newAttendee = RSVP.Attendee.create();
+          newAttendee.set('name', currentAttendee.get('name'));
           nextInvitation.get('attendees').addObject(newAttendee);
         }
       }

@@ -154,7 +154,7 @@ RSVP.Attendee = Ember.Object.extend({
       food_order_id: this.get('food_order_id'),
       '_destroy': !!this.get('isDestroyed')
     };
-  }.property('')
+  }.property('id', 'name', 'food_order_id', 'isDestroyed')
 });
 
 /* Views */
@@ -242,7 +242,11 @@ RSVP.InvitationView = Ember.View.extend({
     } else if ( difference < 0 ) {
       // Truncate list
       for ( var i = 0; i < (difference * -1); i += 1 ) {
-        this.getPath('invitation.attendees').objectAt(this.getPath('invitation.attendees.length') - 1).set('isDestroyed', true);
+        var notDestroyedAttendees = this.getPath('invitation.attendees').filter(function(item, index, self) {
+          return !(!!item.get('isDestroyed'));
+        });
+        var attendee = notDestroyedAttendees.objectAt(notDestroyedAttendees.get('length') - 1);
+        attendee.set('isDestroyed', true);
       }
 
       // NOTE to my future self, it is assumed that the following css rule exists:

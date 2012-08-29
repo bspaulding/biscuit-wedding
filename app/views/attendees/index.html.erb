@@ -12,8 +12,10 @@
     <% @attendees.each do |attendee| %>
       <tr>
         <td><%= attendee.name %></td>
-        <td><%= attendee.invitation.name %></td>
-        <td><%= attendee.invitation.event.name %></td>
+        <% if attendee.invitation %>
+          <td><%= attendee.invitation.name %></td>
+          <td><%= attendee.invitation.event.name %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

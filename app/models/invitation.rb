@@ -1,6 +1,6 @@
 class Invitation < ActiveRecord::Base
   belongs_to :event
-  has_many :attendees
+  has_many :attendees, :dependent => :destroy
 
   accepts_nested_attributes_for :attendees, :allow_destroy => true
 

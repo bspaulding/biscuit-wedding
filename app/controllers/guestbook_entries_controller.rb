@@ -1,4 +1,6 @@
 class GuestbookEntriesController < ApplicationController
+  before_filter :ensure_signing_allowed, :only => [:new, :edit, :update]
+
   # GET /guestbook_entries
   # GET /guestbook_entries.json
   def index
@@ -79,5 +81,10 @@ class GuestbookEntriesController < ApplicationController
       format.html { redirect_to guestbook_entries_url }
       format.json { head :no_content }
     end
+  end
+
+private
+  def ensure_signing_allowed
+    redirect_to guestbook_entries_path unless Property.check("allow-guestbook-signing", "true")
   end
 end
